@@ -1,0 +1,15 @@
+faster_rcnn/
+# Ignore các file tạm, log, và các thư mục build
+*.log
+__pycache__/
+*.pyc
+build/
+dist/
+**/node_modules/
+.vscode 
+data/
+/Tumlum/
+*.pt
+*.pth
+*.onnx
+*.h5

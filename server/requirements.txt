@@ -1,0 +1,17 @@
+# Web Framework & Server
+fastapi==0.110.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9
+
+# Deep Learning Frameworks
+# torch==2.2.1
+# torchvision==0.17.1
+ultralytics==8.1.42 
+
+# Image & Video Processing
+# opencv-python==4.9.0.80
+# Pillow==10.2.0
+# numpy==1.26.4
+
+# Utilities
+aiofiles==23.2.1
