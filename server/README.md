@@ -1,5 +1,18 @@
-```
-uvicorn server:app --reload --port 8000
-```
+## 1. System Requirements
+- A computer with **Docker** and **Docker Compose** installed (Docker Desktop for Windows environments).
+- Ensure the Docker service is running before executing commands.
 
-This command starts the FastAPI server defined in the `server.py` file. The `--reload` flag allows the server to automatically reload when code changes are detected, which is useful during development. The `--port 8000` option specifies that the server will listen on port 8000. You can access the API endpoints at `http://localhost:8000`.
+## 2. Setting Up Model Weights
+To optimize Git repository storage, model weight files (`.pt`, `.pth`) have been excluded. You must manually download and provide the weights before running the system:
+
+1. Access the storage link to download the weights: `[Insert_Google_Drive_Link_Here]`
+2. Download the required weight files to your computer.
+3. Copy and place these files into the `models/` directory located at the root of the project. 
+*(Example: `models/yolov10/best.pt` or `models/faster-rcnn/model.pth`)*.
+(Note: The Docker system is configured to automatically map this directory into the Backend container).
+
+## 3. Starting the System
+Open a command-line interface (Terminal/PowerShell) at the root directory of the project (where the `docker-compose.yml` file is located) and execute the following command:
+
+```bash
+docker-compose up --remove-orphans
