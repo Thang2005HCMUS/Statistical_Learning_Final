@@ -11,6 +11,7 @@ from ultralytics import YOLO, RTDETR
 import torchvision
 from typing import List
 import uuid
+import time
 
 app = FastAPI(title="Object Detection API")
 
@@ -113,7 +114,7 @@ class ModelManager:
             raise HTTPException(status_code=400, detail="Unknown model name")
 
         self.current_model_key = model_key
-        print(f"[INFO] Successfully loaded: {model_key}")
+        print(f"[INFO] Successfully loaded: {model_key} on device: {self.device}")
 
     def predict(self, images: List[np.ndarray]) -> List[np.ndarray]:
         """Hàm dự đoán chung, nhận vào list ảnh (numpy) và trả về list ảnh đã vẽ box"""
@@ -223,6 +224,7 @@ async def detect_video(
     file: UploadFile = File(...)
 ):
     """API 3: Xử lý video"""
+    start_time = time.time()
     model_manager.load_model(model_name, weight_type)
     
     # Tạo file tạm
@@ -240,6 +242,8 @@ async def detect_video(
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = int(cap.get(cv2.CAP_PROP_FPS))
     
+    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
     # Cấu hình writer (vp8 cho webm hoặc avc1 cho mp4)
     fourcc = cv2.VideoWriter_fourcc(*'VP80')
     out = cv2.VideoWriter(output_vid_path, fourcc, fps, (width, height))
@@ -269,6 +273,17 @@ async def detect_video(
             
     cap.release()
     out.release()
+
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    fps_processing = total_frames / elapsed_time if elapsed_time > 0 else 0
+    
+    print("\n" + "="*50)
+    print(f"[PERFORMANCE REPORT] - Video ID: {session_id}")
+    print(f" - Tổng số khung hình đã quét: {total_frames} frames")
+    print(f" - Thời gian AI xử lý: {elapsed_time:.2f} giây")
+    print(f" - Tốc độ trung bình: {fps_processing:.2f} FPS")
+    print("="*50 + "\n")
     
     # Xóa file input tạm
     if os.path.exists(input_vid_path):

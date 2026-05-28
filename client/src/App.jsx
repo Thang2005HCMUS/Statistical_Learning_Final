@@ -5,7 +5,7 @@ import { Loader2, ChevronLeft, ChevronRight, Upload } from 'lucide-react';
 const API_BASE_URL = 'http://localhost:8000/api/detect';
 
 function App() {
-  // State quản lý form
+  // State quản lý form - Đã cố định mặc định là yolo10s và best
   const [modelName, setModelName] = useState('yolo10s');
   const [weightType, setWeightType] = useState('best');
   const [uploadMode, setUploadMode] = useState('single'); // 'single', 'batch', 'video'
@@ -39,6 +39,7 @@ function App() {
     
     setIsLoading(true);
     const formData = new FormData();
+    // Vẫn gửi data xuống backend bình thường nhưng giá trị đã được fix cứng
     formData.append('model_name', modelName);
     formData.append('weight_type', weightType);
 
@@ -70,18 +71,19 @@ function App() {
     }
   };
 
-  // Nút lùi/tiến cho chế độ nhiều ảnh
   const handlePrev = () => setCurrentIndex(prev => Math.max(0, prev - 1));
   const handleNext = () => setCurrentIndex(prev => Math.min(files.length - 1, prev + 1));
 
   return (
     <div className="min-h-screen bg-gray-100 p-8 font-sans">
       <div className="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Hệ Thống Nhận Diện Đối Tượng</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Hệ Thống Nhận Diện (YOLOv10s)</h1>
 
         {/* Thanh Menu Control */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 bg-gray-50 p-4 rounded border">
-          <select 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 bg-gray-50 p-4 rounded border">
+          
+          {/* Đã comment phần chọn Model và Weights để UI gọn hơn */}
+          {/* <select 
             className="p-2 border rounded outline-none focus:ring-2 focus:ring-blue-500"
             value={modelName} 
             onChange={(e) => setModelName(e.target.value)}
@@ -99,6 +101,7 @@ function App() {
             <option value="best">Best Weights (best.pt/pth)</option>
             <option value="last">Last Weights (last.pt/pth)</option>
           </select>
+          */}
 
           <select 
             className="p-2 border rounded outline-none focus:ring-2 focus:ring-blue-500"
@@ -135,7 +138,6 @@ function App() {
           </div>
         </div>
 
-        {/* Nút điều hướng cho chế độ nhiều ảnh */}
         {uploadMode === 'batch' && inputPreviews.length > 0 && (
           <div className="flex justify-center items-center gap-4 mb-4">
             <button onClick={handlePrev} disabled={currentIndex === 0} className="p-2 bg-gray-200 rounded-full disabled:opacity-50 hover:bg-gray-300">
@@ -148,10 +150,9 @@ function App() {
           </div>
         )}
 
-        {/* Vùng hiển thị chia 2: Input - Output */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[500px]">
           {/* Input Panel */}
-          <div className="border-2 border-dashed border-gray-300 rounded flex items-center justify-center bg-gray-50 overflow-hidden relative relative">
+          <div className="border-2 border-dashed border-gray-300 rounded flex items-center justify-center bg-gray-50 overflow-hidden relative">
             <span className="absolute top-2 left-2 bg-black/50 text-white px-2 py-1 rounded text-sm z-10">Input</span>
             {inputPreviews.length > 0 ? (
               uploadMode === 'video' ? (

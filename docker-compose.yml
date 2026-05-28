@@ -1,0 +1,25 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./client
+    ports:
+      - "5173:5173"
+    # volumes:
+    #   - ./client:/app
+    #   - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Giúp Vite hot-reload tốt hơn trên Docker
+
+  backend:
+    build:
+      context: ./server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/app
+      - ./models:/models # Mount thư mục models vào container backend
+    environment:
+      - MODEL_DIR=/models

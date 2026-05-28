@@ -1,15 +1,20 @@
-faster_rcnn/
-# Ignore các file tạm, log, và các thư mục build
-*.log
-__pycache__/
-*.pyc
-build/
-dist/
-**/node_modules/
-.vscode 
-data/
-/Tumlum/
+# Bỏ qua thư viện Frontend
+client/node_modules/
+client/dist/
+
+# Bỏ qua rác Backend
+server/__pycache__/
+server/temp/
+server/venv/
+
+# Bỏ qua Dataset huấn luyện
+Train_Val/
+
+# Chặn toàn bộ file weights AI ở mọi ngóc ngách
 *.pt
 *.pth
+*.weights
 *.onnx
-*.h5
+
+# Bỏ qua file môi trường
+.env
