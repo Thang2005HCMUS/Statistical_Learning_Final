@@ -88,6 +88,7 @@ CUDA_VISIBLE_DEVICES=0 python eval_yolo.py
 ```bash
 CUDA_VISIBLE_DEVICES=0 python eval_rtdetr.py
 ```
+### Faster R-CNN
 ```bash
 cd fastercnn-pytorch-training-pipeline
 python eval_frcnn.py --data ./data_configs/fisheye8k_yolo_format.yaml --weights ./outputs/training/fisheye8k_frcnn_resnet50/best_model.pth -b 8
