@@ -2,3 +2,7 @@
 *.pth
 .ipynb_checkpoints
 *__pycache__/
+/client/
+/server
+/Tumlum
+/.vscode
