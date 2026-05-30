@@ -93,7 +93,7 @@ CUDA_VISIBLE_DEVICES=0 python eval_rtdetr.py
 
 ## 5. Inference
 
-Trước khi chạy inference, hãy cập nhật đường dẫn model trong phần cấu hình (`config`).
+Trước khi chạy inference, hãy cập nhật đường dẫn model trong phần config trong file `infer.py`.
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python infer.py
