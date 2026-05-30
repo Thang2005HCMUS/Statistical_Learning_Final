@@ -107,7 +107,7 @@ CUDA_VISIBLE_DEVICES=0 python infer.py
 .
 ├── data/
 │   ├── Fisheye8K_train_split/ # có sau khi chạy file `split_data.py` để thực hiện training
-│   └── Fisheye8K/
+│   └── Fisheye8K/ # tải xuống bằng kaggle API
 ├── load_dataset.py
 ├── split_data.py
 ├── train_yolo.py
