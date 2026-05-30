@@ -20,7 +20,7 @@ Sau khi tải xong, dataset sẽ được lưu tại:
 ./data/Fisheye8K
 ```
 
-Để tạo tập train/validation (chỉ cần thực hiện khi huấn luyện mô hình):
+Để tạo tập train/validation (80/20) (chỉ cần thực hiện khi huấn luyện mô hình):
 
 ```bash
 python split_data.py
@@ -75,6 +75,7 @@ torchrun --nproc_per_node=1 train.py \
 ---
 
 ## 4. Evaluation
+Evaluate trên tập test cung cấp của Fisheye8K, đường dẫn `./data/Fisheye8K/test`
 
 ### YOLO
 
@@ -105,6 +106,7 @@ CUDA_VISIBLE_DEVICES=0 python infer.py
 ```text
 .
 ├── data/
+│   ├── Fisheye8K_train_split/ # có sau khi chạy file `split_data.py` để thực hiện training
 │   └── Fisheye8K/
 ├── load_dataset.py
 ├── split_data.py
