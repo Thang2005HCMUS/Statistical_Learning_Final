@@ -1,0 +1,9 @@
+train: ./data/Fisheye8K_train_split/train
+val: ./data/Fisheye8K/test
+
+names:
+ 0: bus
+ 1: bike
+ 2: car
+ 3: pedestrian
+ 4: truck
